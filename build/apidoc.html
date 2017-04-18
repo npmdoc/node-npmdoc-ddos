@@ -61,12 +61,149 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.ddos">module ddos</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ddos.ddos">
+            function <span class="apidocSignatureSpan"></span>ddos
+            <span class="apidocSignatureSpan">(params)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.ddos" id="apidoc.module.ddos">module ddos</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.ddos.ddos" id="apidoc.element.ddos.ddos">
+        function <span class="apidocSignatureSpan"></span>ddos
+        <span class="apidocSignatureSpan">(params)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">ddos = function (params) {
+    // burst, maxexpiry, checkinterval is in seconds
+    // limit is the maximum count
+    var _params = {};
+    _params.maxcount = 30;
+    _params.burst = 5;
+    _params.limit = _params.burst * 4;
+    _params.maxexpiry = 120;
+    _params.checkinterval = 1;
+    _params.trustProxy = true;
+    _params.includeUserAgent = true;
+    _params.whitelist = [];
+    _params.errormessage = &#x27;Error&#x27;;
+    _params.testmode = false;
+    _params.silent = false;
+    _params.silentStart = false;
+    _params.responseStatus = 429;
+    if (!params) {
+        params = _params;
+    } else {
+        if ((params.burst !== undefined) &#x26;&#x26; (params.limit === undefined)) {
+            params.limit = params.burst * 4;
+        }
+        if (params.limit != undefined) {
+            params.maxcount = params.limit * 2;
+        }
+        Hash(_params).update(params)
+        params = _params
+    }
+    if (!params.silentStart)
+        console.log(&#x22;ddos: starting params: &#x22;, params)
+    var table = {}
+    var update = function() {
+        //console.log(&#x22;ddos: update&#x22;, table)
+        var keys = Object.keys(table)
+        for (var i = 0; i &#x3c; keys.length; i++) {
+            var key = keys[i]
+            table[key].expiry -= params.checkinterval;
+            if (table[key].expiry &#x3c;= 0)
+                delete table[key]
+        }
+    }
+    var timer = setInterval(update,params.checkinterval*1000)
+    this.stop = function() {
+        if (timer) {
+            clearInterval(timer)
+        }
+    }
+    var handle = function(req,res,next) {
+        if (params.testmode) {
+            console.log(&#x27;ddos: handle: beginning:&#x27;, table)
+        }
+        var address = params.trustProxy ? (req.headers[&#x27;x-forwarded-for&#x27;] || req.connection.remoteAddress) : req.connection.remoteAddress
+;
+        if (params.testmode) {
+            console.log(&#x22;Address:&#x22;, address);
+        }
+        if (params.whitelist.indexOf(address) != -1) {
+            next();
+            return;
+        }
+        var host = address;
+
+        if (params.includeUserAgent)
+            host = host.concat(&#x22;#&#x22; + req.headers[&#x27;user-agent&#x27;]);
+        if (!table[host])
+            table[host] = { count : 1, expiry : 1 }
+        else {
+            table[host].count++
+            if (table[host].count &#x3e; params.maxcount)
+                table[host].count = params.maxcount
+            if (table[host].count &#x3e; params.burst) {
+                if (table[host].expiry &#x3c; params.maxexpiry)
+                    table[host].expiry = Math.min(params.maxexpiry,table[host].expiry * 2)
+            } else {
+                table[host].expiry = 1;
+            }
+        }
+        if (table[host].count &#x3e; params.limit) {
+            if (!params.silent)
+                console.log(&#x27;ddos: denied: entry:&#x27;, host, table[host])
+            if (params.testmode) {
+                response.json(table[host]).status(params.responseStatus).pipe(res)
+            } else {
+                res.writeHead(params.responseStatus);
+                res.end(params.errormessage);
+            }
+        } else {
+            next()
+        }
+        if (params.testmode) {
+            console.log(&#x27;ddos: handle: end:&#x27;, table)
+        }
+    }
+    this.koa = function *(next) {
+        if (params.testmode) {
+            console.log(&#x27;ddos: handle: beginning:&#x27;, table)
+        }
+        var host = this.request.ip + &#x22;#&#x22; + this.request.headers[&#x27;user-agent&#x27;]
+        if (!table[host])
+            table[host] = { count : 1, expiry : 1 }
+        else {
+            table[host].count++
+            if (table[host].count &#x3e; params.maxcount)
+                table[host].count = params.maxcount
+            if (table[host].count &#x3e; params.burst) {
+                if (table[host].expiry &#x3c; params.maxexpiry)
+                    table[host].expiry = Math.min(params.maxexpiry,table[host].expiry * 2)
+            } else {
+                table[host].expiry = 1;
+            }
+        }
+        if (table[host].count &#x3e; params.limit) {
+            console.log(&#x27;ddos: denied: entry:&#x27;, host, table[host])
+            if (params.testmode) {
+                response.json(table[h ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
