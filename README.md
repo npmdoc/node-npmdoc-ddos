@@ -1,9 +1,14 @@
-# api documentation for  [ddos (v0.1.16)](https://github.com/rook2pawn/node-ddos)  [![npm package](https://img.shields.io/npm/v/npmdoc-ddos.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-ddos) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-ddos.svg)](https://travis-ci.org/npmdoc/node-npmdoc-ddos)
+# npmdoc-ddos
+
+#### api documentation for  [ddos (v0.1.16)](https://github.com/rook2pawn/node-ddos)  [![npm package](https://img.shields.io/npm/v/npmdoc-ddos.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-ddos) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-ddos.svg)](https://travis-ci.org/npmdoc/node-npmdoc-ddos)
+
 #### Configurable Denial-Of-Service prevention for http services
 
-[![NPM](https://nodei.co/npm/ddos.png?downloads=true)](https://www.npmjs.com/package/ddos)
+[![NPM](https://nodei.co/npm/ddos.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/ddos)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-ddos/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-ddos_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-ddos/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-ddos/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-ddos/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-ddos/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-ddos/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-ddos/build/screenCapture.npmPackageListing.svg)
 
@@ -18,7 +23,6 @@
 {
     "author": {
         "name": "David Wee",
-        "email": "rook2pawn@gmail.com",
         "url": "http://rook2pawn.com"
     },
     "bugs": {
@@ -55,13 +59,11 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "rook2pawn",
-            "email": "rook2pawn@gmail.com"
+            "name": "rook2pawn"
         }
     ],
     "name": "ddos",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/rook2pawn/node-ddos.git"
@@ -72,16 +74,6 @@
     "version": "0.1.16"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module ddos](#apidoc.module.ddos)
-
-
-
-# <a name="apidoc.module.ddos"></a>[module ddos](#apidoc.module.ddos)
 
 
 
