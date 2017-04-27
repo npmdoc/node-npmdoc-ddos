@@ -1,6 +1,6 @@
 # npmdoc-ddos
 
-#### api documentation for  [ddos (v0.1.16)](https://github.com/rook2pawn/node-ddos)  [![npm package](https://img.shields.io/npm/v/npmdoc-ddos.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-ddos) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-ddos.svg)](https://travis-ci.org/npmdoc/node-npmdoc-ddos)
+#### basic api documentation for  [ddos (v0.1.16)](https://github.com/rook2pawn/node-ddos)  [![npm package](https://img.shields.io/npm/v/npmdoc-ddos.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-ddos) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-ddos.svg)](https://travis-ci.org/npmdoc/node-npmdoc-ddos)
 
 #### Configurable Denial-Of-Service prevention for http services
 
@@ -71,7 +71,8 @@
     "scripts": {
         "test": "tape test/test-whitelist.js && tape test/test-post.js && tape test/test-express.js && mocha --harmony test/test-koa.js"
     },
-    "version": "0.1.16"
+    "version": "0.1.16",
+    "bin": {}
 }
 ```
 
